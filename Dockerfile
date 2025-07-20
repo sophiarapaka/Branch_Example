@@ -1,15 +1,15 @@
-# Use OpenJDK base image
-FROM openjdk:17-slim
+# Use GCC image to compile and run C code
+FROM gcc:latest
 
-# Set work directory
-WORKDIR /app
+# Set working directory
+WORKDIR /usr/src/app
 
-# Copy Java file
-COPY App.java .
+# Copy C code into the container
+COPY hello.c .
 
-# Compile the Java code
-RUN javac App.java
+# Compile the code
+RUN gcc -o myprogram hello.c
 
 # Run the program
-CMD ["java", "App"]
+CMD ["./myprogram"]
 
